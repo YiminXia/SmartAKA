@@ -1,0 +1,190 @@
+﻿<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>南京理工大学</title>
+		<link href="../resources/css/style.css" rel="stylesheet" type="text/css"  media="all" />
+		<meta name="keywords" content="Ctel iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+		<link href='http://fonts.googleapis.com/css?family=Average+Sans' rel='stylesheet' type='text/css'>
+		<!-- Date: 2013-05-22 -->
+		<link rel="stylesheet" href="../resources/css/responsiveslides.css">
+		<script src="./http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	  	<script src="../resources/js/responsiveslides.min.js"></script>
+		<script src="../resources/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+		<script src="../resources/js/angular.min.js"></script>
+		<style>
+		.max{width:99%;height:auto;}
+	    .min{width:100px;height:auto;}
+		</style>		
+	</head>
+	<body>
+			<div class="header">
+				<div class="top-header">
+					<div class="wrap">
+					<div class="top-header-left">
+						<ul>
+							<li><h2>研究生院：&nbsp;</h2></li>
+							<li><span>84315256</span></li>
+						</ul>
+						
+					</div>
+					<div class="clear"> </div>
+				    </div>
+				</div>
+				<div class="main-header">
+					<div class="wrap">
+					    <div class="logo">
+						   <a href="index.html"><img src="../resources/images/22.png" title="logo" /></a>
+					    </div>
+				        <div class="top-nav" ng-app="myApp" ng-controller="newsController">
+				           <ul class="nav">
+                              <dl ng-repeat="item in newsItems">                
+                                 <h1>
+                                     <a href="#{{item.username}}">{{item.username}}</a>                   
+                                 </h1> 
+                              </dl>		 
+			               </ul>	 
+			            </div>
+					    <div class="clear"></div>
+				    </div>
+				</div>			
+			<div class="clear"></div>
+			<div class="content">
+			  <div class="block">
+		         <div class="box grid">			 
+				    <h3>
+				    <input id="input2" type="button" value="Extract SecretKey"/>
+				    </h3>
+				    <pre>				        
+					    <p><font size="5">PRIVATE KEY OF YOU:</font></p>
+					    <div id="info2"></div>				        
+				    </pre>
+			     </div>
+			     <div class="box grid">
+				   <h3>
+				   <input id="input3" type="button" value="Compute T"/>
+				   </h3>
+				   <pre>				      
+				        <p><font size="5">T OF YOU:</font></p>
+				        <div id="info3"></div>			
+				   </pre>
+			     </div>
+			     <div class="box grid">
+				   <h3>
+				     <input id="input4" type="button" value="Create K"/>
+				   </h3>
+				   <pre>				      
+				        <p><font size="5">K OF YOU:</font></p>
+				        <div id="info4"></div>			
+				   </pre>
+			     </div>
+			 <div class="clearfix"></div>
+		  </div>
+	  </div>
+		<!-- End-wrap-->
+	  <div class="clear"> </div>
+	  <div class="block1">
+		    <div class="box1 grid1">
+			    <h3>演示步骤</h3>
+				<img id="img" src="../resources/images/1-1.png"  alt="" />								
+	        </div>
+			<div class="clear"> </div>	
+	   </div>
+</body>
+<script>
+	$(function(){
+        $("#img").click(function(){
+            $(this).toggleClass('min');
+            $(this).toggleClass('max');				   
+        });
+	});
+$("#input1").click(function(){
+	
+	var ss=window.location.pathname;
+	 ss=ss.substr(ss.indexOf("=")+1,ss.length-1);
+     $.ajax({
+			//url:'keys/resetSecretKeyOf'+escape(ss)+'.json',
+			//type:'post',
+			//data: JSON.stringfy(object),
+		});
+     });
+       
+ 
+       
+       
+       
+$("#input2").click(function(){
+    var ss=window.location.pathname;
+	
+    ss=ss.substr(ss.indexOf("=")+1,ss.length-1);
+   // alert(ss);
+   // alert(window.location.hash);
+	$.ajax({
+		url:'keys/extractSecretKeyOf'+escape(ss)+'.json',
+		type:'get',
+		//data: JSON.stringfy(object),
+		success:function(data){
+			$('#info2').html(data[0].P);
+		}
+	});
+});
+       
+       
+$("#input3").click(function(){
+	var ss=window.location.href;     	
+    ss=ss.substr(ss.indexOf("=")+1,ss.length-1);
+	$.ajax({
+		url:'keys/computeTof'+escape(ss)+'.json',
+		type:'get',
+		//data: JSON.stringfy(object),
+		success:function(data){
+			$('#info3').html(data[0].P);
+		}
+	});
+});
+       
+       
+       
+       
+       
+var app = angular.module('myApp', []);
+app.controller('newsController', function($scope, $http) {
+	//alert(1);
+//	var ss=window.location.pathname;     	
+   // ss=ss.substr(ss.indexOf("=")+1,ss.length-1);
+    //alert(ss);
+	$http({
+		url:'news/selectednews.json',
+		method:'GET'
+		}).success(function(data){
+			$scope.newsItems = data;
+			
+			//响应成功
+		})
+
+});
+
+
+$("#input4").click(function(){
+	
+	var ss=window.location.href;     	
+    ss=ss.substr(ss.indexOf("=")+1,ss.length-1);
+  //  alert(ss);
+	
+	
+	$.ajax({
+		url:'keys/createKOf'+escape(ss)+'.json',
+		type:'get',
+		//data: JSON.stringfy(object),
+		success:function(data){
+			$('#info4').html(data[0].P);
+		}
+	});
+});
+</script> 
+</html>

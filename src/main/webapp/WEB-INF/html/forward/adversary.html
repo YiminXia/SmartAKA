@@ -1,0 +1,142 @@
+﻿<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>前向攻击：Adversary</title>
+		<link href="../resources/css/style.css" rel="stylesheet" type="text/css"  media="all" />
+		<meta name="keywords" content="Ctel iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+		<link href='http://fonts.googleapis.com/css?family=Average+Sans' rel='stylesheet' type='text/css'>
+		<!-- Date: 2013-05-22 -->
+		<link rel="stylesheet" href="resources/css/responsiveslides.css">
+		<script src="./http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	  	<script src="../resources/js/responsiveslides.min.js"></script>
+		<script src="../resources/js/jquery-1.11.3.min.js"></script>
+        <script src="../resources/js/angular.min.js"></script>
+	</head>
+	<body>
+		<!-- Start-wrap-->
+		
+			<!-- Start-Header-->
+			<div class="header">
+				<!-- Start-top-header-->
+				<div class="top-header">
+					<div class="wrap">
+					<div class="top-header-left">
+						<ul>
+							<li><h2>前向攻击：&nbsp;</h2></li>
+							<li><span>Adversary</span></li>
+						</ul>
+						
+					</div>
+					<div class="clear"> </div>
+				</div>
+				</div>
+				<!-- End-top-header-->
+				<div class="main-header">
+					<div class="wrap">
+					    <div class="logo">
+						   <a href="index.html"><img src="../resources/images/22.png" title="logo" /></a>
+					    </div>
+				        <div class="top-nav">
+					</div>
+					    <div class="clear"> </div>
+				    </div>
+				</div>			
+			<!-- End-Header-->
+			<div class="clear"> </div>
+			<div class="content">
+			  <div class="block">
+		         <div class="box2 grid">			 
+				    <h3>
+				    <input id="input2" type="button" value="Receive SecretKey Of Alice and Bob"/>
+				    </h3>
+				    <pre>
+				        <div>
+					      <p><font size="5">Privatekey Of Alice:</font></p>
+					      <div id="info21"></div>
+					      <p><font size="5">Privatekey Of Bob:</font></p>
+					      <div id="info22"></div>
+				        </div> 
+				    </pre>
+			     </div>
+			     <div class="box2 grid">
+				   <h3>
+				   <input id="input3" type="button" value="Receive T of Alice and Bob"/>
+				   </h3>
+				   <pre>
+				      <div>
+				        <p><font size="5">TA Of Alice:</font></p>
+				        <div id="info32"></div>
+				        <p><font size="5">TB Of Bob:</font></p>
+				        <div id="info31"></div>
+				      </div>
+				   </pre>
+			     </div>
+			     <div class="box2 grid">
+				   <h3>
+				     <input id="input4" type="button" value="Compute K"/>
+				   </h3>
+				   <pre>
+				     <div>
+					   <p><font size="5">K Of Adversary:</font></p>
+					   <div id="info4"></div>
+				     </div>
+				   </pre>
+			     </div>
+			 <div class="clearfix"></div>
+		  </div>
+	  </div>
+		<!-- End-wrap-->
+<script>
+   $("#input1").click(function(){
+	  //alert(12);
+  	$.ajax({
+  		url:'keys/buildSystem.json',
+  		type:'post'
+  		//data: JSON.stringfy(object),
+  	});
+   });
+        $("#input2").click(function(){
+     
+        	$.ajax({
+        		url:'keys/receiveSAandSB.json',
+        		type:'get',
+        		//data: JSON.stringfy(object),
+        		success:function(data){
+        			$('#info21').html(data[0].P);
+        			$('#info22').html(data[1].P);
+        		}
+        	});
+        });
+        
+        $("#input3").click(function(){
+        	$.ajax({
+        		url:'keys/receiveTAandTB.json',
+        		type:'get',
+        		//data: JSON.stringfy(object),
+        		success:function(data){
+        			$('#info31').html(data[0].P);
+        			$('#info32').html(data[1].P);
+        		}
+        	});
+        });
+        
+        $("#input4").click(function(){
+        	$.ajax({
+        		url:'keys/computeK.json',
+        		type:'get',
+        		//data: JSON.stringfy(object),
+        		success:function(data){
+        			$('#info4').html(data[0].P);
+        		}
+        	});
+        });
+        
+</script>
+	</body>
+</html>
